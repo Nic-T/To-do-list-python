@@ -1,4 +1,6 @@
 from tkinter import *
+import json
+
 def AddTask() :
 
     addTaskWindow = Toplevel(height=500, width=800)
@@ -8,8 +10,10 @@ def AddTask() :
 
     taskTitle = Label(addTaskWindow,text="Task Title", font ="Bahnschrift 10")
     taskTitle.place( relx= 0.1, rely=0.1 )
+    
     taskTitleField = Entry(addTaskWindow)
     taskTitleField.place(relx= 0.14,rely=0.1,width="300")
+    
 
     taskDescribe = Label(addTaskWindow,text="Describe or add notes to your task",font="Bahnschrift 10")
     taskDescribe.place(relx= 0.1,rely=0.15)
@@ -17,10 +21,15 @@ def AddTask() :
     taskDescribeField = Text(addTaskWindow, height="20")
     taskDescribeField.place(relx=0.1,rely=0.20)
 
-    submitButton= Button(addTaskWindow, text="Submit",bd=1)
+    submitButton= Button(addTaskWindow, text="Submit",bd=1, command =lambda  : Submit(taskTitleField.get(),taskDescribeField.get("1.0",END)))
     submitButton.place(relx=0.8,rely=0.9,width=70)
-
-
 
     addTaskWindow.mainloop()
     return ""
+
+def Submit(taskName,taskDescribe):
+    
+    print(taskName + taskDescribe)
+
+
+    return ''
