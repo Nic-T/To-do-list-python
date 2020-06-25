@@ -1,5 +1,7 @@
 from tkinter import *
 import json
+from modules import *
+
 
 def AddTask() :
 
@@ -21,15 +23,22 @@ def AddTask() :
     taskDescribeField = Text(addTaskWindow, height="20")
     taskDescribeField.place(relx=0.1,rely=0.20)
 
-    submitButton= Button(addTaskWindow, text="Submit",bd=1, command =lambda  : Submit(taskTitleField.get(),taskDescribeField.get("1.0",END)))
+    submitButton= Button(addTaskWindow, text="Submit",bd=1, command =lambda  : Submit(taskTitleField.get(),taskDescribeField.get("1.0",END),addTaskWindow))
     submitButton.place(relx=0.8,rely=0.9,width=70)
 
     addTaskWindow.mainloop()
+
+    
     return ""
 
-def Submit(taskName,taskDescribe):
+def Submit(taskName,taskDescribe,addTaskWindow):
+
+    task.taskTitle.append(taskName)
+    task.taskDescription.append(taskDescribe)
+    task.taskProgress.append("open")
+    task.convert(task.taskTitle,task.taskDescription,task.taskProgress)
     
-    print(taskName + taskDescribe)
+    
 
+    return addTaskWindow.destroy() ;
 
-    return ''
