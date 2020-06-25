@@ -33,9 +33,9 @@ def AddTask() :
 
 def Submit(taskName,taskDescribe,addTaskWindow):
 
-    task.taskTitle.append(taskName)
-    task.taskDescription.append(taskDescribe)
-    task.taskProgress.append("open")
+    task.taskTitle= taskName
+    task.taskDescription = taskDescribe
+    task.taskProgress = "open"
     task.convert(task.taskTitle,task.taskDescription,task.taskProgress)
     
     

@@ -1,23 +1,26 @@
 import json
 class Task:
-    taskTitle = []
-    taskDescription = []
-    taskProgress= [] #finished , failed , open
+    taskTitle  = ""
+    taskDescription= ""  
+    taskProgress="" #finished , failed , open
+
 
     def convert(self,taskTitle, taskDescription,taskProgress):
+        
+        taskDict = json.load(open('data.json'))
 
-        jsonTaskTitle = json.dumps(taskTitle)
-        jsonTaskDescription = json.dumps(taskDescription)
-        jsonTaskProgress = json.dumps(taskProgress)
+        taskDict = [taskDict]
 
-        print(jsonTaskTitle,jsonTaskDescription,jsonTaskProgress)
+        taskDict.append({
+            'taskTitle': taskTitle,
+            'taskDescription': taskDescription,
+            'taskProgress': taskProgress
+        })
 
-        with open('data.json', 'w') as outfile:
-            outfile.write(jsonTaskTitle)
-            outfile.write(jsonTaskDescription)
-            outfile.write(jsonTaskProgress)
+        with open('data.json', 'w') as file:
+            json.dump(taskDict,file)
 
-        return;
+        return ;
 task = Task()
 
 
