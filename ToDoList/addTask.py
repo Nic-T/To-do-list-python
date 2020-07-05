@@ -1,6 +1,6 @@
 from tkinter import *
 import json
-from modules import *
+from sql import *
 
 
 def AddTask() :
@@ -33,10 +33,10 @@ def AddTask() :
 
 def Submit(taskName,taskDescribe,addTaskWindow):
 
-    task.taskTitle= taskName
-    task.taskDescription = taskDescribe
-    task.taskProgress = "open"
-    task.convert(task.taskTitle,task.taskDescription,task.taskProgress)
+    taskTitle= taskName
+    taskDescription = taskDescribe
+    taskProgress = "open"
+    writeToDB(taskTitle, taskDescription,taskProgress)
     
     
 
