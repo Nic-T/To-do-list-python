@@ -34,19 +34,19 @@ def main():
    
     space = Canvas(root,bg='red')
     space.place(relwidth=0.80,relheight=1,relx=0.20,rely=0)
+
+    sb= Scrollbar(root,orient='vertical',command=space.yview)
     
+    space.config(yscrollcommand = sb.set)
+    sb.pack(side = RIGHT,fill=Y)
+
     
- 
+
     help=Frame(space,bg='blue')
     help.pack(fill=BOTH,expand=TRUE)
     help.columnconfigure(0,weight=2)
 
-    space.configure(scrollregion=space.bbox("all"))
-
-    print(space.bbox('all'))
-
-    # Also, you do not grid() widgets to the Canvas; those should go into the Frame within the Canvas. http://effbot.org/tkinterbook/canvas.htm
-
+    space.create_window((1,1),window=help,anchor='nw',width=1920 )
 
     def updateData():
         myData=pullFromDB()
@@ -61,14 +61,18 @@ def main():
                 task.taskTitle[i]=myData[i][0]
                 task.taskDescription[i]=myData[i][1]
                 task.taskProgress[i]=myData[i][2]
-                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20")
-                button[i].grid(row=i,column=0,sticky="nesw")
-                  
-        
+                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20",justify=LEFT)
+                button[i].grid(row=i,column=0,sticky="nesw",columnspan=100)
+
+        space.configure(scrollregion=space.bbox("all"))
+        print(space.bbox("all"))
         root.after(1000,updateData)
+        
         return;
     
     updateData()
+
+   
 
 
 
