@@ -1,8 +1,8 @@
 from tkinter import *
-from addTask import *
+from buttons import *
 from modules import *
 from sql import *
-import threading
+
 
 task = Task()
 
@@ -46,7 +46,7 @@ def main():
     help.pack(fill=BOTH,expand=TRUE)
     help.columnconfigure(0,weight=2)
 
-    space.create_window((1,1),window=help,anchor='nw',width=1920 )
+    space.create_window((1,1),window=help,anchor='nw',width=1320 )
 
     def updateData():
         myData=pullFromDB()
@@ -61,7 +61,7 @@ def main():
                 task.taskTitle[i]=myData[i][0]
                 task.taskDescription[i]=myData[i][1]
                 task.taskProgress[i]=myData[i][2]
-                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20",justify=LEFT)
+                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20",anchor='w')
                 button[i].grid(row=i,column=0,sticky="nesw",columnspan=100)
 
         space.configure(scrollregion=space.bbox("all"))
