@@ -31,4 +31,12 @@ def pullFromDB():
 
     return records;
 
+def editDB(taskDesc,status):
+
+    args = status ,taskDesc
+    print(args)
+    t = sqlite3.connect("tasks.db")
+    t.execute("UPDATE tasks SET taskProgress = ? where taskDesc =?",(status,taskDesc))
+    t.commit()
+    t.close()
 
