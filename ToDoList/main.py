@@ -61,13 +61,12 @@ def main():
                 task.taskTitle[i]=myData[i][0]
                 task.taskDescription[i]=myData[i][1]
                 task.taskProgress[i]=myData[i][2]
-                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20",anchor='w')
+                button[i] = Button(help,text=task.taskTitle[i],font="Bahnschrift 20",anchor='w',command = lambda: showDescription(task.taskDescription[i],task.taskProgress[i],i))
                 button[i].grid(row=i,column=0,sticky="nesw",columnspan=100)
 
         space.configure(scrollregion=space.bbox("all"))
-        print(space.bbox("all"))
         root.after(1000,updateData)
-        
+        print(task.taskProgress)
         return;
     
     updateData()
@@ -79,6 +78,26 @@ def main():
 
 
     root.mainloop()
+
+def showDescription(taskDesc,taskP,nr):
+    
+    scene =Toplevel(height=500, width=800)
+    scene.title('Task')
+
+    desc=Text(scene)
+    desc.insert(INSERT,taskDesc)
+    desc.pack(fill=BOTH,expand=TRUE)
+
+    completeTask=Button(scene,command= lambda :completeT(taskP,nr),text='Complete Task')
+    completeTask.pack(side=RIGHT)
+    
+    return ;
+
+def completeT(taskProgress,nr):
+
+    task.taskProgress[nr] ='finished'
+    #creez o functie care sa insereze in db din open in finished
+    return;
 
 
 
